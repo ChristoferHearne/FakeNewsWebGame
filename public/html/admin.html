@@ -1,0 +1,92 @@
+<head>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<div class="content" ng-controller="AdminController">
+  <!-- Admin nav side bar -->
+    <div class="sidebar">
+      <div class="logo-details">
+        <span class="logo_name">Admin</span>
+      </div>
+        <ul class="nav-links">
+          <li>
+            <a ui-sref="admin" class="active">
+              <span class="links_name">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a ui-sref="articles">
+              <span class="links_name">Articles</span>
+            </a>
+          </li>
+          <li>
+            <a ui-sref="sessions">
+              <span class="links_name">Sessions</span>
+            </a>
+          </li>
+          <li>
+            <a ui-sref="players">
+              <span class="links_name">Players</span>
+            </a>
+          </li>
+        </ul>
+    </div>
+    <!-- Dashboard -->
+    <section class="home-section">
+      <div class="home-content">
+        <div class="overview-boxes">
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Total Articles</div>
+              <div class="number">{{ totalArticles }}</div>
+              <i class="far fa-newspaper"></i>
+            </div>
+          </div>
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Total Sessions</div>
+              <div class="number">{{ totalSessions }}</div>
+              <i class="fas fa-gamepad"></i>
+            </div>
+          </div>
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Total Players</div>
+              <div class="number">{{ totalPlayers }}</div>
+            </div>
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Rounds Played</div>
+              <div class="number">{{ totalRounds }}</div>
+            </div>
+            <i class="fas fa-dice"></i>
+          </div>
+        </div>
+        <!-- Recent Sessions -->
+        <div class="sessions-boxes">
+          <div class="recent-sessions box">
+            <div class="title">Recent Sessions (10 latest)</div>
+            <div class="sessions-details">
+              <ul class="details">
+                <li class="topic">Time Stamp</li>
+                <li data-ng-repeat="session in latestSessions">{{session.timestamp}}</li>
+              </ul>
+              <ul class="details">
+              <li class="topic">Player</li>
+              <li data-ng-repeat="session in latestSessions"><a href="/api/players/{{session.player._id}}">{{session.player.username}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">Session</li>
+              <li data-ng-repeat="session in latestSessions"><a href="/api/sessions/{{session._id}}">Click to view data</a></li>
+            </ul>
+            </div>
+            <div class="button">
+              <a ui-sref="sessions">See All</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>
+

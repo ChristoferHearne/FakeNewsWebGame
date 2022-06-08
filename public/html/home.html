@@ -1,0 +1,54 @@
+<head>
+    <link rel="stylesheet" href=css/home.css">
+</head>
+<div ng-controller="HomeController">
+    <div class="head">
+        <div class="headerobjectswrapper">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="subhead">{{ subtitle }}</div>
+    </div>
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>Let's play!<br></h1>
+                <span>If you want to create a temporary player for this session, please fill in the information below</span>
+                <span>Remember, the information is only stored as a session, which the website uses to gather statistics about how well certain categories performed <br> <br>
+                It is not meant to create heated discussion about political leanings or the like</span>
+                <input type="text" placeholder="Username" data-ng-model="userName" />
+                <input type="number" placeholder="Age" data-ng-model="age" />
+                <input type="city" placeholder="City" data-ng-model="city" />
+                <span>What is your employment status?</span>
+                <select name="employment-statuses" data-ng-model="employment">
+                    <option value="" selected disabled hidden>Choose employment status...</option>
+                    <option ng-repeat="employmentStatus in employmentStatuses" value="{{ employmentStatus._id }}">{{ employmentStatus.name }}</option>
+                </select>
+                <span>If you are a student, where are you currently studying?<br></span>
+                <select name="universities" data-ng-model="university">
+                    <option value="" selected disabled hidden>Choose university...</option>
+                    <option ng-repeat="university in universities" value="{{ university._id }}">{{ university.name }}</option>
+                </select> 
+                <span>If you have a political leaning, which one is most representative of you?<br></span>
+                <select name="politcal-leanings" data-ng-model="politicalLeaning">
+                    <option value="" selected disabled hidden>Choose political leaning...</option>
+                    <option ng-repeat="politicalLeaning in politicalLeanings" value="{{ politicalLeaning._id }}">{{ politicalLeaning.name }}</option>
+                </select>
+                <span>Done with your player info? <br><br></span>
+                <button type="button" ng-click="startPlayerSession($event, userName, age, city, employment, university, politicalLeaning)">Play with your sessioninfo!</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>The Fake News Web Game is a simple game where you will get 10 random articles, where its up to you to determine if its "Fake News" or not. You simply press the "Real" or "Fake" buttons to lock in your answer. <br> <br>
+                        The articles are based on a dataset taken from politifact.com, where
+                        developers, through algorithms have determined the validity of a wide array of articles. 
+                    </p>
+                    <p>Want to play without using a temporary player session?</p>
+                    <button class="ghost" id="signUp" type="button" ng-click="startSession()">Play without playerinfo!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

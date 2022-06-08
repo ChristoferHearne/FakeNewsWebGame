@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="css/results.css">
+<div ng-controller="ResultsController">
+    <!-- Heading -->
+    <div class="head">
+        <div class="headerobjectswrapper">
+            <header>{{ newsPaperHeading }}</header>
+        </div>
+    
+        <div class="subhead">Östersund, SWE - Thursday August 30, 2019 - Results</div>
+    </div>
+    <!-- Main content -->
+    <h1>Game Completed!</h1>
+    <div class=wrapper>
+        <!-- Player information -->
+        <div class="container" id="container">
+            <div class="form-container sign-in-container">
+                <form action="#" id="player-form">
+                    <h2>Player information<br></h2>
+                    <span id="player-info">Your session has now been registered with the player information below. You are free to make any changes to your information by editing below.<br><br></span>
+                    <span>You can also decide to delete your player information entirely. <br><br> Your results will still be registered, but with none of the player information attached. Press the delete-button below to get rid of your player<br><br></span>
+                    <span class="editor-heading">Username:</span>
+                    <div class="editor">
+                        <input id="data-input"type="text" ng-model="playerInfo.username" disabled/>
+                        <a ng-click="makeInputEditable($event)"id="username-editor"><i class="fas fa-edit"></i></a>
+                    </div>
+                    <span class="editor-heading">Age:</span>
+                    <div class="editor">
+                        <input type="text" ng-model="playerInfo.age" disabled/>
+                        <a ng-click="makeInputEditable($event)" id="age-editor"><i class="fas fa-edit"></i></a>
+                    </div>
+                    <span class="editor-heading">City:</span>
+                    <div class="editor">
+                        <input type="text" ng-model="playerInfo.city" disabled/>
+                        <a ng-click="makeInputEditable($event)" id="city-editor"><i class="fas fa-edit"></i></a>
+                    </div>
+                    <span class="editor-heading">Employment status:</span>
+                    <div class="editor">
+                        <select id="select-employments" data-ng-model="playerInfo.employment">
+                            <option ng-repeat="employmentStatus in employmentStatuses" value="{{ employmentStatus._id }}">{{ employmentStatus.name }}</option>
+                        </select>
+                    </div>
+                    <span class="editor-heading">University: </span>
+                    <div class="editor">
+                        <select id="select-university" data-ng-model="playerInfo.university">
+                            <option ng-repeat="university in universities" value="{{ university._id }}">{{ university.name }}</option>
+                        </select> 
+                    </div>
+                    <span class="editor-heading">Political Leaning: </span>
+                    <div class="editor">
+                        <select id="select-politcal" data-ng-model="playerInfo.political">
+                            <option ng-repeat="politicalLeaning in politicalLeanings" value="{{ politicalLeaning._id }}">{{ politicalLeaning.name }}</option>
+                        </select>
+                    </div>
+                    <button type="button" ng-click="updatePlayer()">Update player</button>
+                    <button type="button" ng-click="deletePlayer()">Delete my player</button>
+                </form>
+            </div>
+            <!-- Game information -->
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-right">
+                        <h1>Well Played! </h1>
+                        <p>You guessed right on {{ totalRightAnswers }} out of 10 articles</p>
+                        <p>Your gamesession has now been registered and added to the gamestatistics</p>
+                        <button class="ghost" id="signUp" type="button" ui-sref="statistics">Go to Statistics</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Session results -->
+        <div class="results-table">
+            <h3>Your results round by round:</h3>
+            <table id="game-results-tb">
+              <thead>
+                <tr>
+                  <th>Round</th>
+                  <th>Article</th>
+                  <th>Answer</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr data-ng-repeat="round in gameResults">
+                    <td>{{ round.roundNumber }}</td>
+                    <td>{{ round.article }}</td>
+                    <td ng-bind-html="setAnswerStatus(round.answer) | renderHTML"></td>
+                  </tr>
+              </tbody>
+              </table>
+        </div> 
+    </div>
+</div>

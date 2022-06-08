@@ -1,0 +1,57 @@
+<head>
+  <link rel="stylesheet" href="css/sessions.css">
+</head>
+<div class="content-div" ng-controller="SessionsController">
+    <!-- Admin nav bar -->
+    <div class="sidebar">
+        <div class="logo-details">
+          <span class="logo_name">Admin</span>
+        </div>
+          <ul class="nav-links">
+            <li>
+              <a ui-sref="admin">
+                <span class="links_name">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="articles">
+                <span class="links_name">Articles</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="sessions" class="active">
+                <span class="links_name">Sessions</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="players">
+                <span class="links_name">Players</span>
+              </a>
+            </li>
+          </ul>
+      </div>
+    <!-- Session data -->
+    <div class="results-table">
+        <h3>All current sessions in the API:</h3>
+        <table id="game-results-tb">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Game Results</th>
+              <th>Time Stamp</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr data-ng-repeat="session in allSessions">
+                <td>{{ session.player.username }}</td>
+                <td>
+                    <li data-ng-repeat="result in session.gameResult">Round: {{result.roundNumber}} ArticleID: {{result.article}} Answer: {{result.answer}}</li>
+                </td>
+                <td>{{ session.timestamp }}</td>
+                <td><button class="btn-delete" ng-click="deleteSession($event, session._id)"><i class="fa fa-trash-alt"></i></button></td>
+              </tr>
+          </tbody>
+          </table>
+    </div> 
+</div

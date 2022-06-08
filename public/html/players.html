@@ -1,0 +1,121 @@
+<head>
+    <link rel="stylesheet" href="css/players.css">
+</head>
+<!-- Main Content-->
+<div class="content-div" ng-controller="PlayersController">
+    <!-- Admin nav bar -->
+    <div class="sidebar">
+        <div class="logo-details">
+          <span class="logo_name">Admin</span>
+        </div>
+          <ul class="nav-links">
+            <li>
+              <a ui-sref="admin">
+                <span class="links_name">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="articles">
+                <span class="links_name">Articles</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="sessions">
+                <span class="links_name">Sessions</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="players" class="active">
+                <span class="links_name">Players</span>
+              </a>
+            </li>
+          </ul>
+      </div>
+    <!-- Add new player section -->
+    <div class="results-table">
+        <h3>Add new player:</h3>
+        <table id="game-results-tb">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Age</th>
+                <th>City</th>
+                <th>Employment</th>
+                <th>University</th>
+                <th>Political</th>
+                <th>Add</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <form action="#">
+                    <td><input type="text" data-ng-model="userName" required/></td>
+                    <td><input type="text" data-ng-model="age" /></td>
+                    <td><input type="text" data-ng-model="city" /></td>
+                    <td>
+                      <select name="employment-statuses" data-ng-model="employment">
+                        <option value="" selected disabled hidden>Choose employment status...</option>
+                        <option ng-repeat="employmentStatus in employmentStatuses" value="{{ employmentStatus._id }}">{{ employmentStatus.name }}</option>
+                    </select>
+                    </td>
+                    <td>
+                      <select name="universities" data-ng-model="university">
+                        <option value="" selected disabled hidden>Choose university...</option>
+                        <option ng-repeat="university in universities" value="{{ university._id }}">{{ university.name }}</option>
+                    </select> 
+                    </td>
+                    <td>
+                      <select name="politcal-leanings" data-ng-model="politicalLeaning">
+                        <option value="" selected disabled hidden>Choose political leaning...</option>
+                        <option ng-repeat="politicalLeaning in politicalLeanings" value="{{ politicalLeaning._id }}">{{ politicalLeaning.name }}</option>
+                    </select>
+                    </td>
+                    <td><button class="btn-add" ng-click="addPlayer($event, userName, age, city, employment, university, politicalLeaning)"><i class="fas fa-user-plus"></i></button></td>
+                  </form>
+                </tr>
+            </tbody>
+          </table>
+        <!-- All player data -->
+        <h3>All current players in the API:</h3>
+        <table id="game-results-tb">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Age</th>
+              <th>City</th>
+              <th>Employment</th>
+              <th>University</th>
+              <th>Political</th>
+              <th>Delete</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr data-ng-repeat="player in allPlayers">
+                <td>{{ player._id }}</td>
+                <td><input type="text" data-ng-model="player.username" /></td>
+                <td><input type="text" data-ng-model="player.age" /></td>
+                <td><input type="text" data-ng-model="player.city" /></td>
+                <td>
+                  <select name="employment-statuses" data-ng-model="player.employment._id">
+                    <option ng-repeat="employmentStatus in employmentStatuses" value="{{ employmentStatus._id }}">{{ employmentStatus.name }}</option>
+                  </select>
+                </td>
+                <td>
+                  <select id="select-university" data-ng-model="player.university._id">
+                    <option ng-repeat="university in universities" value="{{ university._id }}">{{ university.name }}</option>
+                  </select> 
+                </td>
+                <td>
+                  <select id="select-politcal" data-ng-model="player.political._id">
+                    <option ng-repeat="politicalLeaning in politicalLeanings" value="{{ politicalLeaning._id }}">{{ politicalLeaning.name }}</option>
+                  </select>
+                </td>
+                <td><button class="btn-delete" ng-click="deletePlayer($event, player)"><i class="fa fa-trash-alt"></i></button></td>
+                <td><button class="btn-update" ng-click="updatePlayerInfo($event, player._id, player.username, player.age, player.city, player.employment._id, player.university._id, player.political._id, player.previousUni, player.previousPol, player.previousEmp)"><i class="fas fa-user-edit"></i></button></td>
+              </tr>
+          </tbody>
+        </table>
+    </div> 
+</div>
